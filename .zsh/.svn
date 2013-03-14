@@ -1,0 +1,9 @@
+#svn util functions
+
+#detect if there is a svn directory
+function is_svn() {
+    if [[ -d .svn ]]; then
+        return 0
+    fi
+    return 1
+}

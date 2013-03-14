@@ -1,0 +1,5 @@
+#completions
+
+# Menu completion with tab
+zstyle ':completion:*' menu select
+
