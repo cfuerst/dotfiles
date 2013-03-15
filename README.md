@@ -13,5 +13,5 @@ thanks to:
 - http://blog.joshdick.net
 - https://github.com/danielmitd
 
-fancy:
+fancy terminal theme:
 - http://ethanschoonover.com/solarized
