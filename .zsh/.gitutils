@@ -1,5 +1,4 @@
 #git util functions
-#thanx to http://blog.joshdick.net/2012/12/30/my_git_prompt_for_zsh.html
 
 #detect if there is a git directory
 function is_git() {
