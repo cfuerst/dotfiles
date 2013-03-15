@@ -1,0 +1,46 @@
+#svn util functions
+
+#detect if there is a svn directory
+function is_svn() {
+    if [[ -d .svn ]]; then
+        return 0
+    fi
+    return 1
+}
+
+#colorsetup
+SVN_PROMPT_PREFIX="%{$fg[green]%}[%{$reset_color%}"
+SVN_PROMPT_SUFFIX="%{$fg[green]%}]%{$reset_color%}"
+SVN_PROMPT_DIRTY="%{$fg[red]%}✗%{$reset_color%}"
+SVN_PROMPT_CLEAN="%{$fg[green]%}✓%{$reset_color%}"
+
+#get the branch name
+function svn_get_branch_name() {
+    echo $(svn info 2> /dev/null | awk -F/ '/^URL:/ { for (i=0; i<=NF; i++) { if ($i == "branches" || $i == "tags" ) { print $(i+1); break }; if ($i == "trunk") { print $i; break } } }')
+}
+
+#get the revision name
+function svn_get_rev_nr() {
+    svn info 2> /dev/null | sed -n s/Revision:\ //p
+}
+
+#check if repository is dirty by its change counts
+function get_svn_is_dirty() {
+    change_count=`svn status | grep "?\|\!\|M\|A" | wc -l | tr -d " "`
+    if [ $change_count -eq "0" ]; then
+        echo $SVN_PROMPT_CLEAN
+    else
+        echo $SVN_PROMPT_DIRTY
+    fi
+}
+
+#get the svn root url and extract the last part of the string
+#assuming that this is the project name
+function get_svn_projectname(){
+    string=$(svn info --xml 2>/dev/null | grep "<root>" | sed 's/<[^>]*>//g')
+    echo $(basename $string)
+}
+
+function get_svn_status(){
+    echo "$SVN_PROMPT_PREFIX$(get_svn_is_dirty)$SVN_PROMPT_SUFFIX$SVN_PROMPT_PREFIX%{$fg[yellow]%}$(get_svn_projectname)%{$reset_color%}$SVN_PROMPT_SUFFIX$SVN_PROMPT_PREFIX%{$fg[yellow]%}$(svn_get_branch_name)%{$reset_color%}$SVN_PROMPT_SUFFIX$SVN_PROMPT_PREFIX%{$fg[yellow]%}$(svn_get_rev_nr)%{$reset_color%}$SVN_PROMPT_SUFFIX"
+}

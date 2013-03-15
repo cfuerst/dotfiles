@@ -1,20 +1,29 @@
 #custom prompt setup
 
 #util functions
-source ~/.zsh/.git
-source ~/.zsh/.svn
+source ~/.zsh/.gitutils
+source ~/.zsh/.svnutils
 
 #prompt will be evaluated first (use functions)
 setopt PROMPT_SUBST
 
 #show a specific promt suffix if in a
 #git or svn repository or default
-function prompt_suffix {
+function prompt_suffix() {
     if is_svn; then
-        echo '☿' 
+        echo '⚡' 
     elif is_git; then
         echo '±'
     else; echo '$'
+    fi
+}
+
+function right_prompt() {
+    if is_svn; then
+        get_svn_status
+    elif is_git; then
+        get_git_status
+    else; echo '%*'
     fi
 }
 
@@ -23,4 +32,4 @@ PROMPT='╭─%{$fg_bold[magenta]%}%n%{$reset_color%} at %{$fg_bold[yellow]%}%m%
 ╰─ $(prompt_suffix) '
 
 #extra right prompt
-RPROMPT="[%{$fg_no_bold[yellow]%}stuff%{$reset_color%}]"
+RPROMPT='$(right_prompt)'
