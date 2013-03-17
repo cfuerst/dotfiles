@@ -15,22 +15,23 @@ SVN_PROMPT_DIRTY="%{$fg[red]%}✗%{$reset_color%}"
 SVN_PROMPT_CLEAN="%{$fg[green]%}✓%{$reset_color%}"
 
 #get the branch name
-function svn_get_branch_name() {
-    echo $(svn info 2> /dev/null | awk -F/ '/^URL:/ { for (i=0; i<=NF; i++) { if ($i == "branches" || $i == "tags" ) { print $(i+1); break }; if ($i == "trunk") { print $i; break } } }')
+function get_svn_branch_name() {
+    name=$(svn info 2> /dev/null | awk -F/ '/^URL:/ { for (i=0; i<=NF; i++) { if ($i == "branches" || $i == "tags" ) { print $(i+1); break }; if ($i == "trunk") { print $i; break } } }')
+    echo "$SVN_PROMPT_PREFIX${name}$SVN_PROMPT_SUFFIX"
 }
 
 #get the revision name
-function svn_get_rev_nr() {
-    svn info 2> /dev/null | sed -n s/Revision:\ //p
+function get_svn_rev_nr() {
+    echo "$SVN_PROMPT_PREFIX$(svn info 2> /dev/null | sed -n s/Revision:\ //p)$SVN_PROMPT_SUFFIX"
 }
 
 #check if repository is dirty by its change counts
 function get_svn_is_dirty() {
     change_count=`svn status | grep "?\|\!\|M\|A" | wc -l | tr -d " "`
     if [ $change_count -eq "0" ]; then
-        echo $SVN_PROMPT_CLEAN
+        echo "$SVN_PROMPT_PREFIX$SVN_PROMPT_CLEAN$SVN_PROMPT_SUFFIX"
     else
-        echo $SVN_PROMPT_DIRTY
+        echo "$SVN_PROMPT_PREFIX$SVN_PROMPT_DIRTY$SVN_PROMPT_SUFFIX"
     fi
 }
 
@@ -38,9 +39,10 @@ function get_svn_is_dirty() {
 #assuming that this is the project name
 function get_svn_projectname(){
     string=$(svn info --xml 2>/dev/null | grep "<root>" | sed 's/<[^>]*>//g')
-    echo $(basename $string)
+    echo "$SVN_PROMPT_PREFIX$(basename $string)$SVN_PROMPT_SUFFIX"
 }
 
+#status for prompt
 function get_svn_status(){
-    echo "$SVN_PROMPT_PREFIX$(get_svn_is_dirty)$SVN_PROMPT_SUFFIX$SVN_PROMPT_PREFIX%{$fg[yellow]%}$(get_svn_projectname)%{$reset_color%}$SVN_PROMPT_SUFFIX$SVN_PROMPT_PREFIX%{$fg[yellow]%}$(svn_get_branch_name)%{$reset_color%}$SVN_PROMPT_SUFFIX$SVN_PROMPT_PREFIX%{$fg[yellow]%}$(svn_get_rev_nr)%{$reset_color%}$SVN_PROMPT_SUFFIX"
+    echo "$(get_svn_is_dirty)$(get_svn_projectname)$(get_svn_branch_name)$(get_svn_rev_nr)"
 }

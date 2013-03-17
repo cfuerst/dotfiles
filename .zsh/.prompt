@@ -28,7 +28,7 @@ function right_prompt() {
 }
 
 #default
-PROMPT='╭─%{$fg_bold[magenta]%}%n%{$reset_color%} at %{$fg_bold[yellow]%}%m%{$reset_color%} in %{$fg_bold[green]%}%(!.%1~.%~)%{$reset_color%}
+PROMPT='╭─$CB_BLUE%n$C_R at $CB_PURPLE%m$C_R in $CB_GREEN%(!.%1~.%~)$C_R
 ╰─ $(prompt_suffix) '
 
 #extra right prompt
