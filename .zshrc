@@ -7,5 +7,5 @@ compinit
 promptinit
 
 #load custom plugins
-for plugin in completion historyconf keys colorls path prompt;
+for plugin in spectrum completion historyconf keys colorls path prompt;
 do source ~/.zsh/.$plugin; done
