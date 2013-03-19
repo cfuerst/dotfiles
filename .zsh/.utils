@@ -2,5 +2,5 @@
 
 #set the shell window title
 function set_window_title() {
-    print -nr $'\033'"]2;$1"$'\a'
+    print -nr $'\033'"]2;$ENV_SYMBOL $1"$'\a'
 }
