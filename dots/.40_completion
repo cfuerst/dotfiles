@@ -1,0 +1,12 @@
+#! /bin/zsh
+
+# Menu completion with tab
+zstyle ':completion:*' menu select
+HISTSIZE=100000
+SAVEHIST=100000
+HISTFILE=~/.zsh_history
+setopt hist_ignore_all_dups
+
+#history search
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward

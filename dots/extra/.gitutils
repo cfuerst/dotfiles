@@ -1,3 +1,5 @@
+#! /bin/zsh
+
 #git util functions
 
 #detect if there is a git directory

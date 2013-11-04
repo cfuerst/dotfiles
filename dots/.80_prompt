@@ -1,8 +1,20 @@
+#! /bin/zsh
+
+#execute everytime before a new promt gets set
+function precmd(){
+    set_window_title "$(hostname)"
+}
+
+#set the shell window title
+function set_window_title() {
+    print -nr $'\033'"]2;$ENV_SYMBOL $1"$'\a'
+}
+
 #custom prompt setup
 
 #util functions
-source ~/.zsh/.gitutils
-source ~/.zsh/.svnutils
+source $ZSH_DOTS_DIR/extra/.gitutils
+source $ZSH_DOTS_DIR/extra/.svnutils
 
 #prompt will be evaluated first (use functions)
 setopt PROMPT_SUBST

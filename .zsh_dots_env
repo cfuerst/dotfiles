@@ -1,0 +1,3 @@
+#! /bin/zsh
+
+ENV_SYMBOL=$ENV_SYMBOL_HOME

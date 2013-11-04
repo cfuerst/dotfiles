@@ -1,0 +1,28 @@
+#! /bin/zsh
+
+# some default configs
+
+#available enviroments
+ENV_SYMBOL_HOME="❤"
+ENV_SYMBOL_DEV="✪"
+ENV_SYMBOL_STAGE="✔"
+ENV_SYMBOL_PROD="☢"
+
+ENV_EXTRA=~/.zsh_dots_env
+
+#extra config
+if [ -e "$ENV_EXTRA" ]; then
+    source $ENV_EXTRA
+else
+	#default home symbol
+	ENV_SYMBOL=$ENV_SYMBOL_HOME
+fi
+
+#init
+autoload -U compinit promptinit colors
+colors
+compinit
+promptinit
+
+# for common 256 color terminals
+export TERM=xterm-256color

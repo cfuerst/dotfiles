@@ -1,4 +1,0 @@
-#extra paths
-
-#custom scripts
-PATH=$PATH:$HOME/shellscripts

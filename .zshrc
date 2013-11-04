@@ -1,16 +1,8 @@
-#cfuerst - zsh 5.0.0
+#load custom dotfiles
 
-#init
-autoload -U compinit promptinit colors
-colors
-compinit
-promptinit
+export ZSH_DOTS_DIR=~/dots
 
-#load custom plugins
-for plugin in utils spectrum completion historyconf keys colorls path prompt;
-do source ~/.zsh/.$plugin; done
-
-#execute everytime before a new promt gets set
-function precmd(){
-    set_window_title "$(hostname)"
-}
+if [ -d "$ZSH_DOTS_DIR" ]; then
+    for file in $ZSH_DOTS_DIR/.*
+        do source $file; done
+fi

@@ -26,9 +26,6 @@ function spectrum_ls() {
   done
 }
 
-#colors
-export TERM="xterm-256color"
-
 #list all colors
 #spectrum_ls
 
@@ -46,4 +43,3 @@ eval CB_BLUE='$FG[033]$FX[bold]'
 eval CB_PURPLE='$FG[198]$FX[bold]'
 #reset color
 eval C_R='%{$reset_color%}'
-
