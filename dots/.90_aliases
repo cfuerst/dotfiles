@@ -4,4 +4,4 @@
 alias vim="vim -u $ZSH_DOTS_DIR/extra/.vimrc"
 
 #git with config
-alias git="git -c \"name=cfuerst\" -c \"email=c.fuerst@gmail.com\""
+alias git="git -c \"user.name=cfuerst\" -c \"user.email=c.fuerst@gmail.com\""
