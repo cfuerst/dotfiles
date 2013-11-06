@@ -55,9 +55,9 @@ function get_git_state() {
     fi
 }
 
-#get a fake git revision number
+#get current git revision number
 function get_git_rev_nr(){
-    echo "$GIT_PROMPT_PREFIX$(git rev-list HEAD | wc -l | tr -d ' ')$GIT_PROMPT_SUFFIX"
+    echo "$GIT_PROMPT_PREFIX$(git log --pretty=format:'%h' -n 1)$GIT_PROMPT_SUFFIX"
 }
 
 #get the main project name
