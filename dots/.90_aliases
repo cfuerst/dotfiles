@@ -2,6 +2,3 @@
 
 #vim alias to use diffrent vimrc file
 alias vim="vim -u $ZSH_DOTS_DIR/extra/.vim/.vimrc"
-
-#git with config
-alias git="git -c \"user.name=cfuerst\" -c \"user.email=c.fuerst@gmail.com\""
