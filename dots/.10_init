@@ -1,6 +1,7 @@
 #! /bin/zsh
 
 # some default configs
+export LC_ALL="en_US.UTF-8"
 
 #available enviroments
 ENV_SYMBOL_HOME="❤"
